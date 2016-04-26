@@ -18,6 +18,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -168,6 +169,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
 
+        Log.i("test",email);
+        Log.i("test",password);
+
         boolean cancel = false;
         View focusView = null;
 
@@ -209,7 +213,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
-        return password.length() > 4;
+        return password.length() > 2;
     }
 
     /**
@@ -320,16 +324,24 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
 
-            mFirebase.authWithPassword("bobtony@firebase.com", "correcthorsebatterystaple", new Firebase.AuthResultHandler() {
+            Log.i("test2", mEmail);
+            Log.i("test2",mPassword);
+            mFirebase.authWithPassword(mEmail, mPassword, new Firebase.AuthResultHandler() {
                 @Override
                 public void onAuthenticated(AuthData authData) {
-                    System.out.println("User ID: " + authData.getUid() + ", Provider: " + authData.getProvider());
+                    String test = "User ID: " + authData.getUid() + ", Provider: " + authData.getProvider();
+                    Log.i("test", test);
+
                 }
                 @Override
                 public void onAuthenticationError(FirebaseError firebaseError) {
                     // there was an error
+                    String test = "error";
+                    Log.i("test", test);
                 }
             });
+
+            return true;
         }
 
         @Override
