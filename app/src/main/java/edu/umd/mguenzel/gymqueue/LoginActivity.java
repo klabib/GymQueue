@@ -77,7 +77,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         //firebase setup
         Firebase.setAndroidContext(this);
-        mFirebase = new Firebase("https://gymqueue.firebaseio.com/");
+        mFirebase = new Firebase("https://gymqueue.firebaseio.com");
 
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
@@ -168,9 +168,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         // Store values at the time of the login attempt.
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
-
-        Log.i("test",email);
-        Log.i("test",password);
 
         boolean cancel = false;
         View focusView = null;
@@ -324,8 +321,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
 
-            Log.i("test2", mEmail);
-            Log.i("test2",mPassword);
             mFirebase.authWithPassword(mEmail, mPassword, new Firebase.AuthResultHandler() {
                 @Override
                 public void onAuthenticated(AuthData authData) {
@@ -336,8 +331,24 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 @Override
                 public void onAuthenticationError(FirebaseError firebaseError) {
                     // there was an error
-                    String test = "error";
-                    Log.i("test", test);
+                    String test;
+                    switch (firebaseError.getCode()) {
+                        case FirebaseError.USER_DOES_NOT_EXIST:
+                            // handle a non existing user
+                            test = "user doesnt exist";
+                            Log.i("test", test);
+                            break;
+                        case FirebaseError.INVALID_PASSWORD:
+                            // handle an invalid password
+                            test = "wrong password";
+                            Log.i("test", test);
+                            break;
+                        default:
+                            // handle other errors
+                            test = "other " + firebaseError;
+                            Log.i("test", test);
+                            break;
+                    }
                 }
             });
 
