@@ -28,6 +28,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.client.AuthData;
 import com.firebase.client.Firebase;
@@ -311,10 +312,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         private final String mEmail;
         private final String mPassword;
+        private boolean result;
+        private FirebaseError error;
 
         UserLoginTask(String email, String password) {
             mEmail = email;
             mPassword = password;
+            result = false;
         }
 
         @Override
@@ -327,19 +331,25 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     String test = "User ID: " + authData.getUid() + ", Provider: " + authData.getProvider();
                     Log.i("test", test);
 
+                    setResult(true);
                 }
                 @Override
                 public void onAuthenticationError(FirebaseError firebaseError) {
                     // there was an error
                     String test;
+
                     switch (firebaseError.getCode()) {
                         case FirebaseError.USER_DOES_NOT_EXIST:
                             // handle a non existing user
+                            mEmailView.setError(getString(R.string.error_invalid_email));
+                            mEmailView.requestFocus();
                             test = "user doesnt exist";
                             Log.i("test", test);
                             break;
                         case FirebaseError.INVALID_PASSWORD:
                             // handle an invalid password
+                            mPasswordView.setError(getString(R.string.error_incorrect_password));
+                            mPasswordView.requestFocus();
                             test = "wrong password";
                             Log.i("test", test);
                             break;
@@ -347,12 +357,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                             // handle other errors
                             test = "other " + firebaseError;
                             Log.i("test", test);
+                            Toast.makeText(getApplicationContext(), "Error: " + firebaseError, Toast.LENGTH_LONG).show();
                             break;
                     }
                 }
             });
 
-            return true;
+            return result;
         }
 
         @Override
@@ -365,10 +376,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 Intent myIntent = new Intent(LoginActivity.this,CategorySelect.class);
                 LoginActivity.this.startActivity(myIntent);
             } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
+
             }
         }
+
+        protected void setResult(boolean outcome) {
+
+            result = outcome;
+        }
+
 
         @Override
         protected void onCancelled() {
