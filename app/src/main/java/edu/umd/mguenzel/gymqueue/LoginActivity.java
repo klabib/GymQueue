@@ -353,7 +353,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 switch (firebaseError.getCode()) {
                     case FirebaseError.USER_DOES_NOT_EXIST:
                         // handle a non existing user
-                        mEmailView.setError(getString(R.string.error_invalid_email));
+                        mEmailView.setError(getString(R.string.error_doesnt_exist));
                         mEmailView.requestFocus();
                         test = "user doesnt exist";
                         Log.i("test", test);
