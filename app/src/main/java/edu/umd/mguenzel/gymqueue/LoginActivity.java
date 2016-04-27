@@ -104,6 +104,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
+        Button mEmailSignUpButton = (Button) findViewById(R.id.email_sign_up_button);
+        mEmailSignUpButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(LoginActivity.this, SignUpActivity.class);
+                startActivity(myIntent);
+            }
+        });
+
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
     }
@@ -312,57 +321,69 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         private final String mEmail;
         private final String mPassword;
-        private boolean result;
-        private FirebaseError error;
+        private boolean result = false;
 
         UserLoginTask(String email, String password) {
             mEmail = email;
             mPassword = password;
-            result = false;
+
+        }
+
+        private class AuthResultHandler implements Firebase.AuthResultHandler {
+            @Override
+            public void onAuthenticated(AuthData authData) {
+                String test = "User ID: " + authData.getUid() + ", Provider: " + authData.getProvider();
+                Log.i("test", test);
+
+                result = true;
+
+                mAuthTask = null;
+                showProgress(false);
+                Log.i("test4", ""+result);
+                finish();
+                Intent myIntent = new Intent(LoginActivity.this,CategorySelect.class);
+                LoginActivity.this.startActivity(myIntent);
+            }
+            @Override
+            public void onAuthenticationError(FirebaseError firebaseError) {
+                // there was an error
+                String test;
+                Log.i("test1", ""+result);
+
+                switch (firebaseError.getCode()) {
+                    case FirebaseError.USER_DOES_NOT_EXIST:
+                        // handle a non existing user
+                        mEmailView.setError(getString(R.string.error_invalid_email));
+                        mEmailView.requestFocus();
+                        test = "user doesnt exist";
+                        Log.i("test", test);
+                        break;
+                    case FirebaseError.INVALID_PASSWORD:
+                        // handle an invalid password
+                        mPasswordView.setError(getString(R.string.error_incorrect_password));
+                        mPasswordView.requestFocus();
+                        test = "wrong password";
+                        Log.i("test", test);
+                        break;
+                    default:
+                        // handle other errors
+                        test = "other " + firebaseError;
+                        Log.i("test", test);
+                        Toast.makeText(getApplicationContext(), "Error: " + firebaseError.getCode(), Toast.LENGTH_LONG).show();
+                        UserLoginTask.this.result = true;
+                        Log.i("test2", ""+result);
+                        break;
+                }
+            }
         }
 
         @Override
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
 
-            mFirebase.authWithPassword(mEmail, mPassword, new Firebase.AuthResultHandler() {
-                @Override
-                public void onAuthenticated(AuthData authData) {
-                    String test = "User ID: " + authData.getUid() + ", Provider: " + authData.getProvider();
-                    Log.i("test", test);
+            mFirebase.authWithPassword(mEmail, mPassword, new AuthResultHandler());
 
-                    setResult(true);
-                }
-                @Override
-                public void onAuthenticationError(FirebaseError firebaseError) {
-                    // there was an error
-                    String test;
-
-                    switch (firebaseError.getCode()) {
-                        case FirebaseError.USER_DOES_NOT_EXIST:
-                            // handle a non existing user
-                            mEmailView.setError(getString(R.string.error_invalid_email));
-                            mEmailView.requestFocus();
-                            test = "user doesnt exist";
-                            Log.i("test", test);
-                            break;
-                        case FirebaseError.INVALID_PASSWORD:
-                            // handle an invalid password
-                            mPasswordView.setError(getString(R.string.error_incorrect_password));
-                            mPasswordView.requestFocus();
-                            test = "wrong password";
-                            Log.i("test", test);
-                            break;
-                        default:
-                            // handle other errors
-                            test = "other " + firebaseError;
-                            Log.i("test", test);
-                            Toast.makeText(getApplicationContext(), "Error: " + firebaseError, Toast.LENGTH_LONG).show();
-                            break;
-                    }
-                }
-            });
-
+            Log.i("test3", ""+result);
             return result;
         }
 
@@ -370,7 +391,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         protected void onPostExecute(final Boolean success) {
             mAuthTask = null;
             showProgress(false);
-
+            Log.i("test4", ""+result);
             if (success) {
                 finish();
                 Intent myIntent = new Intent(LoginActivity.this,CategorySelect.class);
