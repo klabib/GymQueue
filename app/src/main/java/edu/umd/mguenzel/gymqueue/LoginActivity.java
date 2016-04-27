@@ -321,7 +321,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         private final String mEmail;
         private final String mPassword;
-        private boolean result = false;
 
         UserLoginTask(String email, String password) {
             mEmail = email;
@@ -335,11 +334,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 String test = "User ID: " + authData.getUid() + ", Provider: " + authData.getProvider();
                 Log.i("test", test);
 
-                result = true;
-
                 mAuthTask = null;
                 showProgress(false);
-                Log.i("test4", ""+result);
+
                 finish();
                 Intent myIntent = new Intent(LoginActivity.this,CategorySelect.class);
                 LoginActivity.this.startActivity(myIntent);
@@ -348,30 +345,21 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             public void onAuthenticationError(FirebaseError firebaseError) {
                 // there was an error
                 String test;
-                Log.i("test1", ""+result);
 
                 switch (firebaseError.getCode()) {
                     case FirebaseError.USER_DOES_NOT_EXIST:
                         // handle a non existing user
                         mEmailView.setError(getString(R.string.error_doesnt_exist));
                         mEmailView.requestFocus();
-                        test = "user doesnt exist";
-                        Log.i("test", test);
                         break;
                     case FirebaseError.INVALID_PASSWORD:
                         // handle an invalid password
                         mPasswordView.setError(getString(R.string.error_incorrect_password));
                         mPasswordView.requestFocus();
-                        test = "wrong password";
-                        Log.i("test", test);
                         break;
                     default:
                         // handle other errors
-                        test = "other " + firebaseError;
-                        Log.i("test", test);
                         Toast.makeText(getApplicationContext(), "Error: " + firebaseError.getCode(), Toast.LENGTH_LONG).show();
-                        UserLoginTask.this.result = true;
-                        Log.i("test2", ""+result);
                         break;
                 }
             }
@@ -383,29 +371,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             mFirebase.authWithPassword(mEmail, mPassword, new AuthResultHandler());
 
-            Log.i("test3", ""+result);
-            return result;
+            return true;
         }
 
         @Override
         protected void onPostExecute(final Boolean success) {
-            mAuthTask = null;
-            showProgress(false);
-            Log.i("test4", ""+result);
-            if (success) {
-                finish();
-                Intent myIntent = new Intent(LoginActivity.this,CategorySelect.class);
-                LoginActivity.this.startActivity(myIntent);
-            } else {
 
-            }
         }
-
-        protected void setResult(boolean outcome) {
-
-            result = outcome;
-        }
-
 
         @Override
         protected void onCancelled() {
