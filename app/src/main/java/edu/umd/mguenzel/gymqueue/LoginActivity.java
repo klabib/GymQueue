@@ -346,6 +346,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 // there was an error
                 String test;
 
+                mAuthTask = null;
+                showProgress(false);
                 switch (firebaseError.getCode()) {
                     case FirebaseError.USER_DOES_NOT_EXIST:
                         // handle a non existing user
