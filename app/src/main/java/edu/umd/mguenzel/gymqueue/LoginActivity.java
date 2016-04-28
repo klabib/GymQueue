@@ -62,6 +62,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      */
     private UserLoginTask mAuthTask = null;
 
+    private final int REQUEST_CODE = 1;
+
     // UI references.
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
@@ -109,13 +111,27 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(LoginActivity.this, SignUpActivity.class);
-                startActivity(myIntent);
+                startActivityForResult(myIntent, REQUEST_CODE);
             }
         });
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
     }
+
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                Toast.makeText(getApplicationContext(), "You have successfully created an account!", Toast.LENGTH_LONG).show();
+            }else {
+                Log.i("test", "back button pressed");
+            }
+        } else {
+            Log.i("test", "request code error");
+        }
+    }
+
 
     private void populateAutoComplete() {
         if (!mayRequestContacts()) {
@@ -339,6 +355,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
                 finish();
                 Intent myIntent = new Intent(LoginActivity.this,CategorySelect.class);
+                myIntent.putExtra("UID", authData.getUid());
                 LoginActivity.this.startActivity(myIntent);
             }
             @Override

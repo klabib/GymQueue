@@ -1,8 +1,6 @@
 package edu.umd.mguenzel.gymqueue;
 
-import android.app.Activity;
-import android.app.DialogFragment;
-import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -11,28 +9,36 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-import android.view.ContextMenu.ContextMenuInfo;
 
 /**
  * Created by sandrasoltz on 4/21/16.
  */
 public class CategorySelect extends AppCompatActivity {
 
+    private String uid;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cat_select);
 
-        Log.i("CATSELECT", "arrived to cat select page");
+        uid = getIntent().getStringExtra("UID");
+
+        Log.i("CATSELECT", "arrived to cat select page UID: " + uid);
         final Button back = (Button) findViewById(R.id.back_button);
         registerForContextMenu(back);
+
         final Button cardio = (Button) findViewById(R.id.cardio_button);
         registerForContextMenu(cardio);
 
         final Button chest = (Button) findViewById(R.id.chest_button);
         registerForContextMenu(chest);
+
         final Button legs = (Button) findViewById(R.id.legs_button);
+        registerForContextMenu(legs);
+
         final Button shoulders = (Button) findViewById(R.id.shoulders_button);
+        registerForContextMenu(shoulders);
 
 
     }
@@ -79,22 +85,27 @@ public class CategorySelect extends AppCompatActivity {
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        if (item.getTitle() == "Action 1") {
-            Toast.makeText(this, "Action 1 invoked", Toast.LENGTH_SHORT).show();
-        } else if (item.getTitle() == "Action 2") {
-            Toast.makeText(this, "Action 2 invoked", Toast.LENGTH_SHORT).show();
-        } else if (item.getTitle() == "Action 3") {
-            Toast.makeText(this, "Action 3 invoked", Toast.LENGTH_SHORT).show();
-        } else {
-            return false;
-        }
+        Toast.makeText(this, item.getTitle() + "pressed", Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(getApplicationContext(), ReserveMachine.class);
+        intent.putExtra("UID", uid);
+        startActivityForResult(intent, 1);
+
         return true;
     }
 
-
-    private void showCardioMachineOptions() {
-
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1) {
+            if (resultCode == RESULT_OK) {
+                Toast.makeText(getApplicationContext(), "You have successfully reserved MACHINE_NAME for TIME", Toast.LENGTH_LONG).show();
+            }else {
+                Log.i("test", "back button pressed");
+            }
+        } else {
+            Log.i("test", "request code error");
+        }
     }
+
 
 
 }
