@@ -85,10 +85,11 @@ public class CategorySelect extends AppCompatActivity {
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        Toast.makeText(this, item.getTitle() + "pressed", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, item.getTitle() + " pressed", Toast.LENGTH_SHORT).show();
 
         Intent intent = new Intent(getApplicationContext(), ReserveMachine.class);
         intent.putExtra("UID", uid);
+        intent.putExtra("machine", item.getTitle());
         startActivityForResult(intent, 1);
 
         return true;

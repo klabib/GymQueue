@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class SignUpActivity extends AppCompatActivity {
     private Button submit, back;
-    private EditText email, pass;
+    private EditText email, pass, passConfirm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +22,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         email = (EditText) findViewById(R.id.email);
         pass = (EditText) findViewById(R.id.password);
+        passConfirm = (EditText) findViewById(R.id.cpassword);
         submit = (Button) findViewById(R.id.submit);
         back = (Button) findViewById(R.id.back);
 
@@ -39,20 +40,22 @@ public class SignUpActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String emailString = email.getText().toString();
                 String passString = pass.getText().toString();
+                String cpassString = passConfirm.getText().toString();
 
                 if (emailString.contains("@")) {
                     if (passString.length() > 5) {
-                        Firebase ref = new Firebase("https://gymqueue.firebaseio.com/");
-                        ref.createUser(emailString, passString, new Firebase.ValueResultHandler<Map<String, Object>>() {
-                            @Override
-                            public void onSuccess(Map<String, Object> result) {
-                                setResult(RESULT_OK, getIntent());
-                                finish();
-                            }
+                        if (passString.equals(cpassString)) {
+                            Firebase ref = new Firebase("https://gymqueue.firebaseio.com/");
+                            ref.createUser(emailString, passString, new Firebase.ValueResultHandler<Map<String, Object>>() {
+                                @Override
+                                public void onSuccess(Map<String, Object> result) {
+                                    setResult(RESULT_OK, getIntent());
+                                    finish();
+                                }
 
-                            @Override
-                            public void onError(FirebaseError firebaseError) {
-                                //TODO: handle firebase error case
+                                @Override
+                                public void onError(FirebaseError firebaseError) {
+                                    //TODO: handle firebase error case
                                 /*
                                 switch (firebaseError.getCode()) {
                                     case FirebaseError.USER_DOES_NOT_EXIST:
@@ -69,10 +72,17 @@ public class SignUpActivity extends AppCompatActivity {
                                         Toast.makeText(getApplicationContext(), "Error: " + firebaseError.getCode(), Toast.LENGTH_LONG).show();
                                         break;
                                 }*/
-                                Toast.makeText(getApplicationContext(), "" + firebaseError, Toast.LENGTH_LONG).show();
-                            }
-                        });
+                                    Toast.makeText(getApplicationContext(), "" + firebaseError, Toast.LENGTH_LONG).show();
+                                }
+                            });
+                        } else { //passwords do not match
+                            Toast.makeText(getApplicationContext(), "Passwords do not match", Toast.LENGTH_LONG).show();
+                        }
+                    } else { //pass too short
+                        Toast.makeText(getApplicationContext(), "Password must be at least 5 characters long", Toast.LENGTH_LONG).show();
                     }
+                } else { //invalid email
+                    Toast.makeText(getApplicationContext(), "Please enter a valid email address", Toast.LENGTH_LONG).show();
                 }
 
                 //Intent intent = new Intent();
