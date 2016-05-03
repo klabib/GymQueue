@@ -15,4 +15,19 @@
         completions."
     </string>
     <string name="title_activity_sign_up">Create An Account</string>
+
+    <string-array name="months">
+        <item>January</item>
+        <item>Febuary</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </string-array>
 </resources>

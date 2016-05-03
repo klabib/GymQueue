@@ -9,4 +9,82 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="edu.umd.mguenzel.gymqueue.ReserveMachine">
 
+    <TextView
+        android:id="@+id/hour_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select an Hour"
+        />
+
+    <RadioGroup
+        android:id="@+id/hour"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_below="@+id/hour_label"
+        android:orientation="horizontal">
+
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New RadioButton"
+            android:id="@+id/radioButton1"
+            />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/minute_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select a minute"
+        android:layout_below="@+id/hour"
+        />
+
+    <RadioGroup
+        android:id="@+id/minute"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_below="@+id/minute_label"
+        android:orientation="horizontal">
+
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New RadioButton"
+            android:id="@+id/radioButton2"
+            />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/ampm_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="AM or PM?"
+        android:layout_below="@id/minute"
+        />
+
+    <RadioGroup
+        android:id="@+id/ampm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_below="@+id/ampm_label"
+        android:orientation="horizontal">
+
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New RadioButton"
+            android:id="@+id/radioButton3"
+            />
+
+    </RadioGroup>
+
+
 </RelativeLayout>

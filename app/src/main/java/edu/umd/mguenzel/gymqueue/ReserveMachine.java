@@ -9,6 +9,8 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Random;
 
 public class ReserveMachine extends Activity {
@@ -48,9 +50,6 @@ public class ReserveMachine extends Activity {
          //   Log.i("test", RESERVABLE_TIMES[i]);
         //}
 
-        Firebase test = mFirebase.child("Categories").child("Back").child("Deadlift");
-        Firebase test2 = mFirebase.child("Categories").child("Back").child("asdasdas");
-
         mFirebase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
@@ -63,10 +62,11 @@ public class ReserveMachine extends Activity {
             }
         });
 
-        //used to trigger onDataChanged so we can use the DataSnapshot
-        rng = new Random();
-        mFirebase.child("Random").setValue(rng.nextInt(10000));
-
+        Date d = new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(d);
+        int month = cal.get(Calendar.MONTH);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
     }
 }
 
