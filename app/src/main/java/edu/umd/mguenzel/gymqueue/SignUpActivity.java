@@ -43,7 +43,6 @@ public class SignUpActivity extends AppCompatActivity {
                 String passString = pass.getText().toString();
                 String cpassString = passConfirm.getText().toString();
 
-                if (emailString.contains("@")) {
                     if (passString.length() > 5) {
                         if (passString.equals(cpassString)) {
                             Firebase ref = new Firebase("https://gymqueue.firebaseio.com/");
@@ -81,9 +80,6 @@ public class SignUpActivity extends AppCompatActivity {
                     } else { //pass too short
                         Toast.makeText(getApplicationContext(), "Password must be at least 5 characters long", Toast.LENGTH_LONG).show();
                     }
-                } else { //invalid email
-                    Toast.makeText(getApplicationContext(), "Please enter a valid email address", Toast.LENGTH_LONG).show();
-                }
 
                 //Intent intent = new Intent();
                 //intent.putExtra("lat",latString);

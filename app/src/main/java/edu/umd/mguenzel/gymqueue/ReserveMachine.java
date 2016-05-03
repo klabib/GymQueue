@@ -3,9 +3,13 @@ package edu.umd.mguenzel.gymqueue;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
+import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
+
+import java.util.Random;
 
 public class ReserveMachine extends Activity {
 
@@ -13,6 +17,9 @@ public class ReserveMachine extends Activity {
     String uid;
     String machine;
     Firebase mFirebase;
+    String month;
+    int day;
+    Random rng;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,23 +48,25 @@ public class ReserveMachine extends Activity {
          //   Log.i("test", RESERVABLE_TIMES[i]);
         //}
 
-        //TODO: add DataSnapshot to be abel to use get value
         Firebase test = mFirebase.child("Categories").child("Back").child("Deadlift");
         Firebase test2 = mFirebase.child("Categories").child("Back").child("asdasdas");
 
-        if (test != null) {
-            Log.i("test", ""+test);
-        }
+        mFirebase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                //int currval = (Integer) snapshot.child("April").child("25").child("6:00").child("Treadmill").getValue();
+            }
 
-        if (test2 != null) {
-            Log.i("test", "should not get here "+test2);
-        } else {
-            Log.i("test", "null");
-        }
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
 
-        test.getParent();
+            }
+        });
 
+        //used to trigger onDataChanged so we can use the DataSnapshot
+        rng = new Random();
+        mFirebase.child("Random").setValue(rng.nextInt(10000));
 
     }
-
 }
+
