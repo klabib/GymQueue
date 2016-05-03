@@ -2,6 +2,7 @@ package edu.umd.mguenzel.gymqueue;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -56,23 +57,22 @@ public class SignUpActivity extends AppCompatActivity {
                                 @Override
                                 public void onError(FirebaseError firebaseError) {
                                     //TODO: handle firebase error case
-                                /*
+
                                 switch (firebaseError.getCode()) {
-                                    case FirebaseError.USER_DOES_NOT_EXIST:
+                                    case FirebaseError.EMAIL_TAKEN:
                                         // handle a non existing user
-                                        Toast.makeText(getApplicationContext(), "")
+                                        Toast.makeText(getApplicationContext(), "Email has been taken", Toast.LENGTH_LONG).show();
                                         break;
-                                    case FirebaseError.INVALID_PASSWORD:
-                                        // handle an invalid password
-                                        mPasswordView.setError(getString(R.string.error_incorrect_password));
-                                        mPasswordView.requestFocus();
+                                    case FirebaseError.INVALID_EMAIL:
+                                        // handle a non existing user
+                                        Toast.makeText(getApplicationContext(), "Email is not valid", Toast.LENGTH_LONG).show();
+                                        Log.i("test",""+firebaseError.toString());
                                         break;
                                     default:
                                         // handle other errors
                                         Toast.makeText(getApplicationContext(), "Error: " + firebaseError.getCode(), Toast.LENGTH_LONG).show();
                                         break;
-                                }*/
-                                    Toast.makeText(getApplicationContext(), "" + firebaseError, Toast.LENGTH_LONG).show();
+                                }
                                 }
                             });
                         } else { //passwords do not match
