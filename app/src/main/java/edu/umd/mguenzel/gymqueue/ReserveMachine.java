@@ -3,6 +3,7 @@ package edu.umd.mguenzel.gymqueue;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.RadioGroup;
 
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
@@ -11,7 +12,6 @@ import com.firebase.client.ValueEventListener;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Random;
 
 public class ReserveMachine extends Activity {
 
@@ -21,7 +21,10 @@ public class ReserveMachine extends Activity {
     Firebase mFirebase;
     String month;
     int day;
-    Random rng;
+    private boolean isChecking = true;
+    private int mCheckedId = R.id.one;
+    private RadioGroup mFirstGroup;
+    private RadioGroup mSecondGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +70,34 @@ public class ReserveMachine extends Activity {
         cal.setTime(d);
         int month = cal.get(Calendar.MONTH);
         int day = cal.get(Calendar.DAY_OF_MONTH);
+
+
+        mFirstGroup = (RadioGroup) findViewById(R.id.hour1);
+        mSecondGroup = (RadioGroup) findViewById(R.id.hour2);
+
+        mFirstGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (checkedId != -1 && isChecking) {
+                    isChecking = false;
+                    mSecondGroup.clearCheck();
+                    mCheckedId = checkedId;
+                }
+                isChecking = true;
+            }
+        });
+
+        mSecondGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (checkedId != -1 && isChecking) {
+                    isChecking = false;
+                    mFirstGroup.clearCheck();
+                    mCheckedId = checkedId;
+                }
+                isChecking = true;
+            }
+        });
     }
 }
 
