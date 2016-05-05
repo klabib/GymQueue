@@ -16,6 +16,8 @@ import java.util.Map;
 public class SignUpActivity extends AppCompatActivity {
     private Button submit, back;
     private EditText email, pass, passConfirm;
+    private Firebase mFirebase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +28,8 @@ public class SignUpActivity extends AppCompatActivity {
         passConfirm = (EditText) findViewById(R.id.cpassword);
         submit = (Button) findViewById(R.id.submit);
         back = (Button) findViewById(R.id.back);
+        mFirebase = new Firebase("https://gymqueue.firebaseio.com");
+
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,7 +82,7 @@ public class SignUpActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "Passwords do not match", Toast.LENGTH_LONG).show();
                         }
                     } else { //pass too short
-                        Toast.makeText(getApplicationContext(), "Password must be at least 5 characters long", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Password must be at least 6 characters long", Toast.LENGTH_LONG).show();
                     }
 
                 //Intent intent = new Intent();

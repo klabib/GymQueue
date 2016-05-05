@@ -352,6 +352,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
                 mAuthTask = null;
                 showProgress(false);
+                mFirebase.child("Users").child(authData.getUid()).child("email").setValue(mEmail);
 
                 finish();
                 Intent myIntent = new Intent(LoginActivity.this,CategorySelect.class);
