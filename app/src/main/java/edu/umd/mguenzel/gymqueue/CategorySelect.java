@@ -87,9 +87,26 @@ public class CategorySelect extends AppCompatActivity {
     public boolean onContextItemSelected(MenuItem item) {
         Toast.makeText(this, item.getTitle() + " pressed", Toast.LENGTH_SHORT).show();
 
+        String machineName = (String) item.getTitle();
+
+        String cat;
+        if (machineName.equals("Deadlift") || machineName.equals("Lat Pulldown") || machineName.equals("Row Machine"))
+            cat = "Back";
+        else if (machineName.equals("Elliptical") || machineName.equals("Recumbent Bike") || machineName.equals("Stair Stepper") ||
+                machineName.equals("Stationary Bike") || machineName.equals("Treadmill"))
+            cat = "Cardio";
+        else if (machineName.equals("Bench Press") || machineName.equals("Chest Flys") || machineName.equals("Decline Bench Press") ||
+                machineName.equals("Incline Bench Press"))
+            cat = "Chest";
+        else if (machineName.equals("Shoulder Press"))
+            cat = "Shoulders";
+        else
+            cat = "Legs";
+
         Intent intent = new Intent(getApplicationContext(), ReserveMachine.class);
+        intent.putExtra("cat", cat);
         intent.putExtra("UID", uid);
-        intent.putExtra("machine", item.getTitle());
+        intent.putExtra("machine", machineName);
         startActivityForResult(intent, 1);
 
         return true;
