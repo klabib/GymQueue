@@ -10,6 +10,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+
+
 
 /**
  * Created by sandrasoltz on 4/21/16.
@@ -17,6 +21,9 @@ import android.widget.Toast;
 public class CategorySelect extends AppCompatActivity {
 
     private String uid;
+    private Firebase mFirebase = new Firebase("https://gymqueue.firebaseio.com");
+
+
     private static final int MENU_USERPAGE = Menu.FIRST;
     private static final int MENU_LOGOUT = Menu.FIRST + 1;
 
@@ -144,6 +151,9 @@ public class CategorySelect extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             case MENU_LOGOUT:
+                mFirebase.unauth();
+                setResult(RESULT_OK);
+                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
