@@ -112,11 +112,6 @@ public class ReserveMachine extends Activity {
                     }
                     //hour = toMilitaryTime(hour, ampm);
 
-                    //if time is later today
-                        //reserve for today
-                    //else
-                        //reserve for tomorrow
-
                     String str = month + "/" + day + "/" + year + " " + hour + min  + " " + ampm;
                     DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy hh:mm a");
                     Date date, currDate = new Date();
@@ -129,8 +124,6 @@ public class ReserveMachine extends Activity {
                     }
 
                     String monthName = getMonthName(month);
-
-
 
                     if (date.after(currDate)) { //time is later today, reserve for today
                         Log.i("test", "today");
@@ -145,7 +138,10 @@ public class ReserveMachine extends Activity {
                     } else { //time passed today, reserve for tomorrow
                         Log.i("test", "tomorrow" +  " " + currDate.toString());
 
-                        //TODO: increment day properly
+                        //day = 31;
+                        //incrementDay(monthName, day);
+                        //Log.i("test", "Month: " + monthName + " Day: " + day);
+
                         mFirebase.child("Reservations").child(monthName).child(Integer.toString(day + 1)).child(hour + min + " " + ampm).child(machine).setValue(1);
                     }
 
@@ -211,7 +207,72 @@ public class ReserveMachine extends Activity {
             return "December";
         }
 
-        return "never here";
+        return null;
+    }
+
+    private void incrementDay(String month, int day) {
+        if (month.equals("January")) {
+            if (day == 31)
+                month = "February";
+            else
+                return;
+        } else if (month.equals("February")) {
+            if (day == 28)
+                month = "March";
+            else
+                return;
+        } else if (month.equals("March")) {
+            if (day == 31)
+                month = "April";
+            else
+                return;
+        } else if (month.equals("April")) {
+            if (day == 30)
+                month = "May";
+            else
+                return;
+        } else if (month.equals("May")) {
+            if (day == 31)
+                month = "June";
+            else
+                return;
+        } else if (month.equals("June")) {
+            if (day == 30)
+                month = "July";
+            else
+                return;
+        } else if (month.equals("July")) {
+            if (day == 31)
+                month = "August";
+            else
+                return;
+        } else if (month.equals("August")) {
+            if (day == 31)
+                month = "September";
+            else
+                return;
+        } else if (month.equals("September")) {
+            if (day == 30)
+                month = "October";
+            else
+                return;
+        } else if (month.equals("October")) {
+            if (day == 31)
+                month = "November";
+            else
+                return;
+        } else if (month.equals("November")) {
+            if (day == 30)
+                month = "December";
+            else
+                return;
+        } else if (month.equals("December")) {
+            if (day == 31)
+                month = "January";
+            else
+                return;
+        }
+        day = 1;
     }
 
     private String toMilitaryTime(String time, String ampm) {
