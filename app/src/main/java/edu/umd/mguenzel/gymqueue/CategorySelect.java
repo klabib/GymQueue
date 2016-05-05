@@ -145,6 +145,7 @@ public class CategorySelect extends AppCompatActivity {
         switch (item.getItemId()) {
             case MENU_USERPAGE:
                 Intent intent = new Intent(getApplicationContext(), UserPage.class);
+                intent.putExtra("UID", uid);
                 startActivity(intent);
                 return true;
             case MENU_LOGOUT:
