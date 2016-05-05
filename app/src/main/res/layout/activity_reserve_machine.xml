@@ -1,12 +1,230 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     tools:context="edu.umd.mguenzel.gymqueue.ReserveMachine">
+
+    <TextView
+        android:id="@+id/hour_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select an Hour"
+        />
+
+    <RadioGroup
+        android:id="@+id/hour1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_below="@+id/hour_label"
+        android:layout_marginTop="25dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="01"
+            android:id="@+id/one"
+            />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="02"
+            android:id="@+id/two"
+            />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="03"
+            android:id="@+id/three"
+            />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="04"
+            android:id="@+id/four"
+            />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="05"
+            android:id="@+id/five"
+            />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="06"
+            android:id="@+id/six"
+            android:layout_below="@+id/ampm_label"
+            />
+
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/hour2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/hour1">
+
+        <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="07"
+        android:id="@+id/seven"
+        android:layout_below="@+id/hour"
+        android:layout_alignParentStart="true"
+            />
+
+        <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="08"
+        android:id="@+id/eight"
+        android:layout_below="@+id/hour"
+        android:layout_toEndOf="@+id/seven"
+            />
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="09"
+        android:id="@+id/nine"
+        android:layout_below="@+id/hour"
+        android:layout_toEndOf="@+id/eight" />
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="10"
+        android:id="@+id/ten"
+        android:layout_below="@+id/hour"
+        android:layout_toEndOf="@+id/nine" />
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="11"
+        android:id="@+id/eleven"
+        android:layout_below="@+id/hour"
+        android:layout_toStartOf="@+id/twelve" />
+
+        <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="12"
+        android:id="@+id/twelve"
+        android:layout_below="@+id/hour"
+        android:layout_alignStart="@+id/radioButton2" />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/minute_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select a minute"
+        android:layout_below="@+id/hour2"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="15dp"/>
+
+    <RadioGroup
+        android:id="@+id/minute"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/minute_label"
+        android:layout_marginTop="6dp">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":00"
+            android:id="@+id/zero"
+            android:layout_below="@+id/minute_label"
+             />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":15"
+            android:id="@+id/fifteen"
+            android:layout_below="@+id/minute_label"
+            />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":30"
+            android:id="@+id/thirty"
+            android:layout_below="@+id/minute_label"
+            />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":45"
+            android:id="@+id/fourty_five"
+            android:layout_below="@+id/minute_label"
+            />
+
+
+        </RadioGroup>
+
+    <TextView
+        android:id="@+id/ampm_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="AM or PM?"
+        android:layout_below="@+id/minute"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="15dp"/>
+
+    <RadioGroup
+        android:id="@+id/ampm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/ampm_label"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="6dp">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="am"
+            android:id="@+id/am"
+            />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="pm"
+            android:id="@+id/pm"
+            />
+
+        </RadioGroup>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:id="@+id/submit"
+        android:layout_below="@+id/ampm"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="22dp" />
+
+
 
 </RelativeLayout>

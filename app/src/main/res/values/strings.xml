@@ -16,4 +16,23 @@
         completions."
     </string>
 
+
+=======
+
+
+    <string-array name="months">
+        <item>January</item>
+        <item>Febuary</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </string-array>
+>>>>>>> 2e5e8c306a3903e191389bba9c14199d1a218007
 </resources>
