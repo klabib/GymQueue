@@ -24,7 +24,7 @@ import java.util.Date;
 public class ReserveMachine extends Activity {
 
     private final String[] RESERVABLE_TIMES = new String[57];
-    private String uid, machine;
+    private String uid, machine, cat, prev_time = "";
     private Firebase mFirebase;
     private int day, month, year;
     private boolean isChecking = true;
@@ -38,6 +38,8 @@ public class ReserveMachine extends Activity {
 
     private Calendar cal;
 
+    private boolean test = false, completed = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +51,7 @@ public class ReserveMachine extends Activity {
         Intent intent = getIntent();
         uid = intent.getStringExtra("UID");
         machine = intent.getStringExtra("machine");
+        cat = intent.getStringExtra("cat");
 
         submit = (Button) findViewById(R.id.submit);
         rg_hour1 = (RadioGroup) findViewById(R.id.hour1);
@@ -62,33 +65,6 @@ public class ReserveMachine extends Activity {
         month = cal.get(Calendar.MONTH) + 1;
         day = cal.get(Calendar.DAY_OF_MONTH);
         year = cal.get(Calendar.YEAR);
-
-        //setting up the reservable times, from 8:00-22:00
-        int index = 0;
-        for (int i = 8; i < 22; i++) {
-            RESERVABLE_TIMES[index] = i + ":00";
-            RESERVABLE_TIMES[index + 1] = i + ":15";
-            RESERVABLE_TIMES[index + 2] = i + ":30";
-            RESERVABLE_TIMES[index + 3] = i + ":45";
-            index += 4;
-        }
-        RESERVABLE_TIMES[index] = "22:00";
-
-        //for (int i = 0; i <= 56; i++) {
-         //   Log.i("test", RESERVABLE_TIMES[i]);
-        //}
-
-        mFirebase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                //int currval = (Integer) snapshot.child("April").child("25").child("6:00").child("Treadmill").getValue();
-            }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-
-            }
-        });
 
 
         submit.setOnClickListener(new View.OnClickListener() {
@@ -129,11 +105,7 @@ public class ReserveMachine extends Activity {
                         Log.i("test", "today");
                         //create reservation in firebase
 
-                        mFirebase.child("Reservations").child(monthName).child(Integer.toString(day)).child(hour + min + " " + ampm).child(machine).setValue(1);
-
-                        //IN ON DATA CHANGED
-                        //if reservation value at time > max
-                            //change it back and display toast
+                        //mFirebase.child("Reservations").child(monthName).child(Integer.toString(day)).child(hour + min + " " + ampm).child(machine).setValue(1);
 
                     } else { //time passed today, reserve for tomorrow
                         Log.i("test", "tomorrow" +  " " + currDate.toString());
@@ -142,14 +114,60 @@ public class ReserveMachine extends Activity {
                         //incrementDay(monthName, day);
                         //Log.i("test", "Month: " + monthName + " Day: " + day);
 
-                        mFirebase.child("Reservations").child(monthName).child(Integer.toString(day + 1)).child(hour + min + " " + ampm).child(machine).setValue(1);
+                        //TODO: increment day properly
+                        day = day + 1;
+
+                        //mFirebase.child("Reservations").child(monthName).child(Integer.toString(day + 1)).child(hour + min + " " + ampm).child(machine).setValue(1);
                     }
+
+
+                    test = true;
+                    //store time in firebase to trigger onDataChanged
+                    mFirebase.child("time_for_reservation").setValue(hour + min + " " + ampm);
 
 
                 }
             }
         });
 
+        mFirebase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                if (test == false || completed == true)
+                    return;
+                Log.i("test", "@@@@@@@@@@@@@IN ON DATA CHANGED");
+                String time = (String) snapshot.child("time_for_reservation").getValue();
+
+                Long max = (Long) snapshot.child("Categories").child(cat).child(machine).getValue();
+                Long currVal = (Long) (snapshot.child("Reservations").child(getMonthName(month)).child(Integer.toString(day)).child(time).child(machine).getValue());
+
+                Long res_num;
+                if (currVal == null) { //no reservations for this machine at this time yet
+                    res_num = 1L;
+                    mFirebase.child("Reservations").child(getMonthName(month)).child(Integer.toString(day)).child(time).child(machine).setValue(res_num);
+                    Toast.makeText(getApplicationContext(), "You have successfully reserved " + machine + "1 "
+                            + "for " + getMonthName(month) + " " + day + " at " + time, Toast.LENGTH_LONG).show();
+                    completed = true;
+                    finish();
+                } else { //at least one reservation at this time for this machine
+                    if (currVal >= max) { //full for this time
+                        Toast.makeText(getApplicationContext(), "There are no spots available at this time. Please select a new time", Toast.LENGTH_LONG).show();
+                    } else { //set reservation
+                        res_num = currVal + 1;
+                        mFirebase.child("Reservations").child(getMonthName(month)).child(Integer.toString(day)).child(time).child(machine).setValue(res_num);
+                        Toast.makeText(getApplicationContext(), "You have successfully reserved " + machine + " " + res_num
+                                        + " for " + getMonthName(month) + " " + day + " at " + time, Toast.LENGTH_LONG).show();
+                        completed = true;
+                        finish();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                Toast.makeText(getApplicationContext(), "An error occured, please try again later", Toast.LENGTH_LONG).show();
+            }
+        });
 
         //listeners to help with selecting hours
         mFirstGroup = (RadioGroup) findViewById(R.id.hour1);
