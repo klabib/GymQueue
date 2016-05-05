@@ -127,8 +127,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }else {
                 Log.i("test", "back button pressed");
             }
-        } else {
-            Log.i("test", "request code error");
+        } else if (requestCode == 2) {
+            Toast.makeText(getApplicationContext(), "You have successfully logged out!", Toast.LENGTH_LONG).show();
+            mEmailView.setText("");
+            mPasswordView.setText("");
         }
     }
 
@@ -354,11 +356,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 showProgress(false);
                 mFirebase.child("Users").child(authData.getUid()).child("email").setValue(mEmail);
 
-                finish();
+                //finish();
                 Intent myIntent = new Intent(LoginActivity.this,CategorySelect.class);
                 myIntent.putExtra("UID", authData.getUid());
-                LoginActivity.this.startActivity(myIntent);
+                startActivityForResult(myIntent,2);
             }
+
             @Override
             public void onAuthenticationError(FirebaseError firebaseError) {
                 // there was an error
@@ -384,6 +387,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 }
             }
         }
+
+
 
         @Override
         protected Boolean doInBackground(Void... params) {

@@ -5,10 +5,15 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.ContextMenu;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+
+
 
 /**
  * Created by sandrasoltz on 4/21/16.
@@ -16,6 +21,11 @@ import android.widget.Toast;
 public class CategorySelect extends AppCompatActivity {
 
     private String uid;
+    private Firebase mFirebase = new Firebase("https://gymqueue.firebaseio.com");
+
+
+    private static final int MENU_USERPAGE = Menu.FIRST;
+    private static final int MENU_LOGOUT = Menu.FIRST + 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,6 +134,31 @@ public class CategorySelect extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+
+        menu.add(Menu.NONE, MENU_USERPAGE, Menu.NONE, "User Statistics");
+        menu.add(Menu.NONE, MENU_LOGOUT, Menu.NONE, "Logout");
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case MENU_USERPAGE:
+                Intent intent = new Intent(getApplicationContext(), UserPage.class);
+                startActivity(intent);
+                return true;
+            case MENU_LOGOUT:
+                mFirebase.unauth();
+                setResult(RESULT_OK);
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
 
 }
