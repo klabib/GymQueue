@@ -88,7 +88,7 @@ public class ReserveMachine extends Activity {
                     }
                     //hour = toMilitaryTime(hour, ampm);
 
-                    String str = month + "/" + day + "/" + year + " " + hour + min  + " " + ampm;
+                    String str = month + "/" + day + "/" + year + " " + hour + min + " " + ampm;
                     DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy hh:mm a");
                     Date date, currDate = new Date();
                     try {
@@ -108,7 +108,7 @@ public class ReserveMachine extends Activity {
                         //mFirebase.child("Reservations").child(monthName).child(Integer.toString(day)).child(hour + min + " " + ampm).child(machine).setValue(1);
 
                     } else { //time passed today, reserve for tomorrow
-                        Log.i("test", "tomorrow" +  " " + currDate.toString());
+                        Log.i("test", "tomorrow" + " " + currDate.toString());
 
                         //day = 31;
                         //incrementDay(monthName, day);
@@ -145,9 +145,11 @@ public class ReserveMachine extends Activity {
                 if (currVal == null) { //no reservations for this machine at this time yet
                     res_num = 1L;
                     mFirebase.child("Reservations").child(getMonthName(month)).child(Integer.toString(day)).child(time).child(machine).setValue(res_num);
-                    Toast.makeText(getApplicationContext(), "You have successfully reserved " + machine + "1 "
+                    Toast.makeText(getApplicationContext(), "You have successfully reserved " + machine + " 1 "
                             + "for " + getMonthName(month) + " " + day + " at " + time, Toast.LENGTH_LONG).show();
                     completed = true;
+
+                    updateUserStats(snapshot, uid, machine);
                     finish();
                 } else { //at least one reservation at this time for this machine
                     if (currVal >= max) { //full for this time
@@ -156,8 +158,10 @@ public class ReserveMachine extends Activity {
                         res_num = currVal + 1;
                         mFirebase.child("Reservations").child(getMonthName(month)).child(Integer.toString(day)).child(time).child(machine).setValue(res_num);
                         Toast.makeText(getApplicationContext(), "You have successfully reserved " + machine + " " + res_num
-                                        + " for " + getMonthName(month) + " " + day + " at " + time, Toast.LENGTH_LONG).show();
+                                + " for " + getMonthName(month) + " " + day + " at " + time, Toast.LENGTH_LONG).show();
                         completed = true;
+
+                        updateUserStats(snapshot, uid, machine);
                         finish();
                     }
                 }
@@ -197,6 +201,16 @@ public class ReserveMachine extends Activity {
             }
         });
     }
+
+    private void updateUserStats(DataSnapshot snapshot, String user, String machineName) {
+        Long num = (Long) snapshot.child("Users").child(uid).child(machine).getValue();
+        if (num == null) { //first time user is using this machine
+            mFirebase.child("Users").child(uid).child(machineName).setValue(1);
+        } else {
+            mFirebase.child("Users").child(uid).child(machineName).setValue(num + 1);
+        }
+    }
+
 
     private String getMonthName(int month) {
         if (month == 1) {
