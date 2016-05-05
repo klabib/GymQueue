@@ -129,6 +129,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         } else if (requestCode == 2) {
             Toast.makeText(getApplicationContext(), "You have successfully logged out!", Toast.LENGTH_LONG).show();
+            mEmailView.setText("");
+            mPasswordView.setText("");
         }
     }
 
