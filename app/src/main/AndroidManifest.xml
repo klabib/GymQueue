@@ -29,6 +29,7 @@
             android:label="@string/title_activity_sign_up"
              />
         <activity android:name=".ReserveMachine"></activity>
+        <activity android:name="UserPage"></activity>
     </application>
 
 </manifest>
