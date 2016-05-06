@@ -1,6 +1,9 @@
 package edu.umd.mguenzel.gymqueue;
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -40,10 +43,14 @@ public class ReserveMachine extends Activity {
 
     private boolean test = false, completed = false;
 
+    private AlarmManager mAlarmManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reserve_machine);
+
+        mAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
         Firebase.setAndroidContext(this);
         mFirebase = new Firebase("https://gymqueue.firebaseio.com");
@@ -98,6 +105,8 @@ public class ReserveMachine extends Activity {
                         Log.i("exception", "Time parse error (should never get here)");
                         return;
                     }
+
+                    Log.i("DATES IN MILLIS", "@@@@@@@@@@ curr: " + currDate.getTime() + " date: " + date);
 
                     String monthName = getMonthName(month);
 
@@ -162,6 +171,15 @@ public class ReserveMachine extends Activity {
                         completed = true;
 
                         updateUserStats(snapshot, uid, machine);
+
+                        Intent intent_alarm = new Intent(getApplicationContext(), ReserveMachine.class);
+                        PendingIntent pi = PendingIntent.getService(getApplicationContext(), 0, intent_alarm, PendingIntent.FLAG_ONE_SHOT);
+
+                        long alarm_time = System.currentTimeMillis();
+
+
+                        //mAlarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, , pi);
+
                         finish();
                     }
                 }

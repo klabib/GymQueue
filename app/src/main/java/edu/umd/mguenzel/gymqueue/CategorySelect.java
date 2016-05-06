@@ -9,9 +9,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
+
 import com.firebase.client.Firebase;
-import com.firebase.client.FirebaseError;
 
 
 
@@ -95,8 +94,6 @@ public class CategorySelect extends AppCompatActivity {
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        Toast.makeText(this, item.getTitle() + " pressed", Toast.LENGTH_SHORT).show();
-
         String machineName = (String) item.getTitle();
 
         String cat;
@@ -125,7 +122,7 @@ public class CategorySelect extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
-                Toast.makeText(getApplicationContext(), "You have successfully reserved MACHINE_NAME for TIME", Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), "You have successfully reserved MACHINE_NAME for TIME", Toast.LENGTH_LONG).show();
             }else {
                 Log.i("test", "back button pressed");
             }
@@ -148,6 +145,7 @@ public class CategorySelect extends AppCompatActivity {
         switch (item.getItemId()) {
             case MENU_USERPAGE:
                 Intent intent = new Intent(getApplicationContext(), UserPage.class);
+                intent.putExtra("UID", uid);
                 startActivity(intent);
                 return true;
             case MENU_LOGOUT:
