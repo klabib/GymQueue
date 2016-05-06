@@ -62,10 +62,6 @@
                 android:gravity="center_horizontal" />
 
 
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
                 <AutoCompleteTextView
                     android:id="@+id/email"
                     android:layout_width="match_parent"
@@ -74,20 +70,15 @@
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:textColor="#CDCDCD"
+                    android:textColor="#373C4B"
                     android:textSize="20dp"
                     android:layout_marginTop="40dp"
                     android:gravity="center"
                     android:background="@drawable/rounded_edittext"
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginBottom="16dp"
                     android:clickable="true"
-                    android:focusableInTouchMode="true" />
+                     />
 
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
 
 
                 <EditText
@@ -100,16 +91,14 @@
                     android:imeActionLabel="@string/action_sign_in_short"
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"
-
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:textColor="#CDCDCD"
+                    android:textColor="#373C4B"
                     android:textSize="20dp"
                     android:background="@drawable/rounded_edittext"
                     android:gravity="center"
                     />
 
-            </android.support.design.widget.TextInputLayout>
 
             <Button
                 android:id="@+id/email_sign_in_button"
@@ -123,7 +112,8 @@
                 android:visibility="visible"
                 style="?android:attr/borderlessButtonStyle"
                 android:textColor="#CDCDCD"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                />
 
             <Button
                 android:id="@+id/email_sign_up_button"
@@ -135,7 +125,7 @@
                 android:background="#373C4B"
                 android:visibility="visible"
                 style="?android:attr/borderlessButtonStyle"
-                android:textColor="#CDCDCD"
+                android:textColor="#FFFFFF"
                 android:textSize="15dp" />
 
         </LinearLayout>

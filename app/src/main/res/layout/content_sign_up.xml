@@ -13,15 +13,28 @@
     tools:showIn="@layout/activity_sign_up">
 
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Register"
+        android:textSize="30dp"
+        android:textColor="#CDCDCD"
+        android:typeface="sans"
+        android:gravity="center_horizontal"
+        android:id="@+id/textView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/email_text"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
         android:text="Email"
-        android:textSize="@dimen/abc_text_size_medium_material" />
+        android:textColor="@color/textColor"
+        android:textSize="@dimen/abc_text_size_medium_material"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentStart="true" />
 
     <EditText
         android:layout_width="match_parent"
@@ -30,7 +43,9 @@
         android:ems="10"
         android:id="@+id/email"
         android:focusable="true"
-        android:layout_below="@+id/email_text">
+        android:background="@drawable/slight_rounded_edittext"
+        android:layout_below="@+id/email_text"
+        android:layout_alignParentStart="true">
     <requestFocus />
     </EditText>
 
@@ -41,6 +56,7 @@
         android:text="Password"
         android:textSize="@dimen/abc_text_size_medium_material"
         android:layout_below="@+id/email"
+        android:textColor="@color/textColor"
         />
 
     <EditText
@@ -49,7 +65,8 @@
         android:inputType="textPassword"
         android:ems="10"
         android:id="@+id/password"
-        android:layout_below="@+id/password_text"/>
+        android:layout_below="@+id/password_text"
+        android:background="@drawable/slight_rounded_edittext"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -58,6 +75,7 @@
         android:text="Confirm Password"
         android:textSize="@dimen/abc_text_size_medium_material"
         android:layout_below="@+id/password"
+        android:textColor="@color/textColor"
         />
 
     <EditText
@@ -67,15 +85,20 @@
         android:ems="10"
         android:id="@+id/cpassword"
         android:layout_below="@+id/confirm_text"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/slight_rounded_edittext"
+        android:layout_marginBottom="10dp"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Submit"
         android:id="@+id/submit"
+        android:background="@drawable/slightly_rounded_button"
+        android:textColor="#CDCDCD"
+
         android:layout_alignTop="@+id/back"
-        android:layout_toEndOf="@+id/back" />
+        android:layout_alignParentStart="true" />
 
 
     <Button
@@ -83,10 +106,44 @@
         android:layout_height="wrap_content"
         android:text="Back"
         android:id="@+id/back"
-        android:layout_centerVertical="true"
-        android:layout_alignParentStart="true" />
+        android:background="@drawable/slightly_rounded_button"
+        android:textColor="#CDCDCD"
+        android:layout_below="@+id/cpassword"
+        android:layout_toEndOf="@+id/imageView" />
 
+    <ImageView
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/sneaker_104"
+        android:layout_weight="0.91"
+        android:scaleType="fitCenter"
+        android:id="@+id/imageView2"
+        android:layout_marginTop="52dp"
+        android:layout_below="@+id/submit"
+        android:layout_centerHorizontal="true" />
 
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="75dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/sneaker_104"
+        android:layout_weight="0.91"
+        android:scaleType="fitCenter"
+        android:id="@+id/imageView3"
+        android:layout_alignTop="@+id/imageView2"
+        android:layout_toEndOf="@+id/imageView2" />
+
+    <ImageView
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/sneaker_104"
+        android:layout_weight="0.91"
+        android:scaleType="fitCenter"
+        android:id="@+id/imageView"
+        android:layout_alignTop="@+id/imageView2"
+        android:layout_toEndOf="@+id/email_text" />
 
 
 </RelativeLayout>

@@ -24,12 +24,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CategorySelect" />
+        <activity android:name=".CategorySelect"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity
             android:name=".SignUpActivity"
             android:label="@string/title_activity_sign_up"
-             />
-        <activity android:name=".ReserveMachine"></activity>
+            android:theme="@style/AppTheme.NoActionBar"
+            />
+        <activity android:name=".ReserveMachine"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
         <activity android:name="UserPage"></activity>
     </application>
 
