@@ -126,6 +126,13 @@ public class CategorySelect extends AppCompatActivity {
             }else {
                 Log.i("test", "back button pressed");
             }
+        }
+        if (requestCode == 3) {
+            if (resultCode == RESULT_OK) {
+                //Toast.makeText(getApplicationContext(), "You have successfully reserved MACHINE_NAME for TIME", Toast.LENGTH_LONG).show();
+            }else {
+                Log.i("test", "back button pressed");
+            }
         } else {
             Log.i("test", "request code error");
         }
@@ -146,7 +153,7 @@ public class CategorySelect extends AppCompatActivity {
             case MENU_USERPAGE:
                 Intent intent = new Intent(getApplicationContext(), UserPage.class);
                 intent.putExtra("UID", uid);
-                startActivity(intent);
+                startActivityForResult(intent, 3);
                 return true;
             case MENU_LOGOUT:
                 mFirebase.unauth();

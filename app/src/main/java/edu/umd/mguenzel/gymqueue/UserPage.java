@@ -37,6 +37,23 @@ public class UserPage extends Activity{
         mFirebase = new Firebase("https://gymqueue.firebaseio.com");
 
         elliptical_num = (TextView)findViewById(R.id.elliptical_num);
+        rec_bike_num = (TextView)findViewById(R.id.rec_bike_num);
+        stair_num = (TextView)findViewById(R.id.stair_num);
+        stat_bike_num = (TextView)findViewById(R.id.stat_bike_num);
+        treadmill_num = (TextView)findViewById(R.id.treadmill_num);
+        deadlift_num = (TextView)findViewById(R.id.deadlift_num);
+        lat_pull_num = (TextView)findViewById(R.id.lat_pull_num);
+        row_mach_num = (TextView)findViewById(R.id.row_mach_num);
+        bench_press_norm_num = (TextView)findViewById(R.id.bench_press_norm_num);
+        chest_fly_num = (TextView)findViewById(R.id.chest_fly_num);
+        bench_press_incl_num = (TextView)findViewById(R.id.bench_press_incl_num);
+        bench_press_decl_num = (TextView)findViewById(R.id.bench_press_decl_num);
+        calf_raise_num = (TextView)findViewById(R.id.calf_raise_num);
+        leg_ext_num = (TextView)findViewById(R.id.leg_ext_num);
+        leg_press_num = (TextView)findViewById(R.id.leg_press_num);
+        squat_num = (TextView)findViewById(R.id.squat_num);
+        should_press_num = (TextView)findViewById(R.id.should_press_num);
+
         numbers = new long[16];
 
         uid = getIntent().getStringExtra("UID");
@@ -46,6 +63,7 @@ public class UserPage extends Activity{
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                setResult(RESULT_OK, getIntent());
                 finish();
             }
         });
@@ -60,9 +78,65 @@ public class UserPage extends Activity{
 
                     if (child.getKey() != "email") {
                         String key = child.getKey();
-                        Long val = (Long) child.getValue();
+                        Long val;
+
+                        if(child.getValue() == null) {
+                            val = (long) 0;
+                        }
+                        else {
+                            val = (Long) child.getValue();
+                        }
+
                         if (key.equals("Elliptical")) {
                             elliptical_num.setText(val.toString());
+                        }
+                        else if (key.equals("Recumbent Bike")) {
+                            rec_bike_num.setText(val.toString());
+                        }
+                        else if (key.equals("Stair Stepper")) {
+                            stair_num.setText(val.toString());
+                        }
+                        else if (key.equals("Stationary Bike")) {
+                            stat_bike_num.setText(val.toString());
+                        }
+                        else if (key.equals("Treadmill")) {
+                            treadmill_num.setText(val.toString());
+                        }
+                        else if (key.equals("Deadlift")) {
+                            deadlift_num.setText(val.toString());
+                        }
+                        else if (key.equals("Lat Pulldown")) {
+                            lat_pull_num.setText(val.toString());
+                        }
+                        else if (key.equals("Row Machine")) {
+                            row_mach_num.setText(val.toString());
+                        }
+                        else if (key.equals("Bench Press")) {
+                            bench_press_norm_num.setText(val.toString());
+                        }
+                        else if (key.equals("Chest Flys")) {
+                            chest_fly_num.setText(val.toString());
+                        }
+                        else if (key.equals("Decline Bench Press")) {
+                            bench_press_decl_num.setText(val.toString());
+                        }
+                        else if (key.equals("Incline Bench Press")) {
+                            bench_press_incl_num.setText(val.toString());
+                        }
+                        else if (key.equals("Calf Raises")) {
+                            calf_raise_num.setText(val.toString());
+                        }
+                        else if (key.equals("Leg Extension")) {
+                            leg_ext_num.setText(val.toString());
+                        }
+                        else if (key.equals("Leg Press")) {
+                            leg_press_num.setText(val.toString());
+                        }
+                        else if (key.equals("Squat")) {
+                            squat_num.setText(val.toString());
+                        }
+                        else if (key.equals("Shoulder Press")) {
+                            should_press_num.setText(val.toString());
                         }
                         //Log.i("test", child.toString());
                         map.put(key, val);
