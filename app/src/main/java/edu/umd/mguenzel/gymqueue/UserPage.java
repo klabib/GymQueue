@@ -1,10 +1,8 @@
 package edu.umd.mguenzel.gymqueue;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -14,6 +12,8 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
+
+import java.util.TreeMap;
 
 public class UserPage extends Activity{
     private int elliptical, rec_bike, stair, stat_bike, treadmill, deadlift, lat_pull, row_mach,
@@ -26,6 +26,8 @@ public class UserPage extends Activity{
     private long[] numbers;
     private Firebase mFirebase;
     private String uid;
+
+    private TreeMap<String, Long> map = new TreeMap<String, Long>();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,9 +54,22 @@ public class UserPage extends Activity{
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
+                Log.i("test", "here");
+
                 for (DataSnapshot child : dataSnapshot.child("Users").child(uid).getChildren()) {
-                    numbers[counter] = (long) child.getValue();
-                    counter++;
+
+                    if (child.getKey() != "email") {
+                        String key = child.getKey();
+                        Long val = (Long) child.getValue();
+                        if (key.equals("Elliptical")) {
+                            elliptical_num.setText(val.toString());
+                        }
+                        //Log.i("test", child.toString());
+                        map.put(key, val);
+                        Log.i("test", "key: " + key + " val: " + val);
+                        //numbers[counter] = (Long) child.getValue();
+                        //counter++;
+                    }
                 }
                 /*
                 //cardio
@@ -92,7 +107,9 @@ public class UserPage extends Activity{
             }
         });
 
-        elliptical_num.setText("" + numbers[0]);
+        //Long l = map.get("Elliptical");
+        //Log.i("test", "" + l);
+        //elliptical_num.setText(map.get("Elliptical").toString());
     }
 
 }
