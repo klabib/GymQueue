@@ -27,7 +27,7 @@ import java.util.Date;
 public class ReserveMachine extends Activity {
 
     private final String[] RESERVABLE_TIMES = new String[57];
-    private String uid, machine, cat, prev_time = "";
+    private String uid, machine, cat, hour = "", min = "";
     private Firebase mFirebase;
     private int day, month, year;
     private boolean isChecking = true;
@@ -44,6 +44,8 @@ public class ReserveMachine extends Activity {
     private boolean test = false, completed = false;
 
     private AlarmManager mAlarmManager;
+
+    private Date date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,9 +86,8 @@ public class ReserveMachine extends Activity {
                 } else if (rg_ampm.getCheckedRadioButtonId() == -1) {
                     Toast.makeText(getApplicationContext(), "Please select either am or pm", Toast.LENGTH_LONG).show();
                 } else { //valid
-                    String min = (String) ((RadioButton) findViewById(rg_min.getCheckedRadioButtonId())).getText();
+                    min = (String) ((RadioButton) findViewById(rg_min.getCheckedRadioButtonId())).getText();
                     String ampm = (String) ((RadioButton) findViewById(rg_ampm.getCheckedRadioButtonId())).getText();
-                    String hour = "";
 
                     if (rg_hour1.getCheckedRadioButtonId() == -1) {
                         hour = (String) ((RadioButton) findViewById(rg_hour2.getCheckedRadioButtonId())).getText();
@@ -97,7 +98,7 @@ public class ReserveMachine extends Activity {
 
                     String str = month + "/" + day + "/" + year + " " + hour + min + " " + ampm;
                     DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy hh:mm a");
-                    Date date, currDate = new Date();
+                    Date currDate = new Date();
                     try {
                         date = formatter.parse(str);
                         Log.i("date", date.toString());
@@ -106,16 +107,11 @@ public class ReserveMachine extends Activity {
                         return;
                     }
 
-                    Log.i("DATES IN MILLIS", "@@@@@@@@@@ curr: " + currDate.getTime() + " date: " + date);
-
                     String monthName = getMonthName(month);
 
                     if (date.after(currDate)) { //time is later today, reserve for today
                         Log.i("test", "today");
-                        //create reservation in firebase
-
-                        //mFirebase.child("Reservations").child(monthName).child(Integer.toString(day)).child(hour + min + " " + ampm).child(machine).setValue(1);
-
+                        //do nothing
                     } else { //time passed today, reserve for tomorrow
                         Log.i("test", "tomorrow" + " " + currDate.toString());
 
@@ -126,7 +122,6 @@ public class ReserveMachine extends Activity {
                         //TODO: increment day properly
                         day = day + 1;
 
-                        //mFirebase.child("Reservations").child(monthName).child(Integer.toString(day + 1)).child(hour + min + " " + ampm).child(machine).setValue(1);
                     }
 
 
@@ -144,7 +139,6 @@ public class ReserveMachine extends Activity {
             public void onDataChange(DataSnapshot snapshot) {
                 if (test == false || completed == true)
                     return;
-                Log.i("test", "@@@@@@@@@@@@@IN ON DATA CHANGED");
                 String time = (String) snapshot.child("time_for_reservation").getValue();
 
                 Long max = (Long) snapshot.child("Categories").child(cat).child(machine).getValue();
@@ -159,6 +153,7 @@ public class ReserveMachine extends Activity {
                     completed = true;
 
                     updateUserStats(snapshot, uid, machine);
+                    setResult(RESULT_OK);
                     finish();
                 } else { //at least one reservation at this time for this machine
                     if (currVal >= max) { //full for this time
@@ -177,9 +172,16 @@ public class ReserveMachine extends Activity {
 
                         long alarm_time = System.currentTimeMillis();
 
+                        mAlarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, date.getTime() , pi);
+                        Log.i("test", "" + date.toString());
 
-                        //mAlarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, , pi);
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.setTimeInMillis((date.getTime()));
+                        int mYear = calendar.get(Calendar.YEAR);
+                        int mMonth = calendar.get(Calendar.MONTH) + 1;
+                        int mDay = calendar.get(Calendar.DAY_OF_MONTH);
 
+                        setResult(RESULT_OK);
                         finish();
                     }
                 }
