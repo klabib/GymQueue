@@ -3,8 +3,6 @@ package edu.umd.mguenzel.gymqueue;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,16 +55,6 @@ public class UserPage extends Activity{
         numbers = new long[16];
 
         uid = getIntent().getStringExtra("UID");
-
-        final Button back = (Button) findViewById(R.id.back_button);
-
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setResult(RESULT_OK, getIntent());
-                finish();
-            }
-        });
 
         mFirebase.addValueEventListener(new ValueEventListener() {
             @Override

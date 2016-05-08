@@ -2,7 +2,6 @@ package edu.umd.mguenzel.gymqueue;
 
 import android.app.Activity;
 import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -167,6 +166,7 @@ public class ReserveMachine extends Activity {
 
                         updateUserStats(snapshot, uid, machine);
 
+                        /*
                         Intent intent_alarm = new Intent(getApplicationContext(), ReserveMachine.class);
                         PendingIntent pi = PendingIntent.getService(getApplicationContext(), 0, intent_alarm, PendingIntent.FLAG_ONE_SHOT);
 
@@ -180,6 +180,7 @@ public class ReserveMachine extends Activity {
                         int mYear = calendar.get(Calendar.YEAR);
                         int mMonth = calendar.get(Calendar.MONTH) + 1;
                         int mDay = calendar.get(Calendar.DAY_OF_MONTH);
+                        */
 
                         setResult(RESULT_OK);
                         finish();
