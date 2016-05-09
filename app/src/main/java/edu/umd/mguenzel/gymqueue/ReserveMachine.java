@@ -4,12 +4,14 @@ import android.app.Activity;
 import android.app.AlarmManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.client.DataSnapshot;
@@ -51,6 +53,18 @@ public class ReserveMachine extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reserve_machine);
 
+        TextView tv=(TextView)findViewById(R.id.hour_label);
+        Typeface face=Typeface.createFromAsset(getAssets(),"fonts/quicksand_regular.ttf");
+        tv.setTypeface(face);
+
+        TextView tv1=(TextView)findViewById(R.id.minute_label);
+        tv1.setTypeface(face);
+
+        TextView tv2=(TextView)findViewById(R.id.ampm_label);
+        tv2.setTypeface(face);
+
+
+
         mAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
         Firebase.setAndroidContext(this);
@@ -62,6 +76,7 @@ public class ReserveMachine extends Activity {
         cat = intent.getStringExtra("cat");
 
         submit = (Button) findViewById(R.id.submit);
+        submit.setTypeface(face);
         rg_hour1 = (RadioGroup) findViewById(R.id.hour1);
         rg_hour2 = (RadioGroup) findViewById(R.id.hour2);
         rg_min = (RadioGroup) findViewById(R.id.minute);

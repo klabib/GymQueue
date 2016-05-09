@@ -2,13 +2,24 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="USER STATS"
+        android:id="@+id/title"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:textColor="@color/textColor"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Elliptical: "
         android:id="@+id/elliptical"
-        android:layout_alignParentTop="true"
+        android:textColor="@color/textColor"
+        android:layout_below="@+id/title"
         android:layout_alignParentStart="true" />
 
     <TextView
@@ -17,7 +28,8 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="0"
         android:id="@+id/elliptical_num"
-        android:layout_alignParentTop="true"
+        android:textColor="@color/textColor"
+        android:layout_below="@+id/title"
         android:layout_toEndOf="@+id/elliptical" />
 
     <TextView
@@ -27,7 +39,8 @@
         android:text="Recumbent Bike: "
         android:id="@+id/rec_bike"
         android:layout_below="@+id/elliptical"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textColor="@color/textColor"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -36,7 +49,8 @@
         android:text="0"
         android:id="@+id/rec_bike_num"
         android:layout_alignTop="@+id/rec_bike"
-        android:layout_toEndOf="@+id/rec_bike" />
+        android:layout_toEndOf="@+id/rec_bike"
+        android:textColor="@color/textColor"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -45,7 +59,8 @@
         android:text="Stair Stepper: "
         android:id="@+id/stair"
         android:layout_alignTop="@+id/stair_num"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textColor="@color/textColor"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -54,7 +69,8 @@
         android:text="0"
         android:id="@+id/stair_num"
         android:layout_below="@+id/rec_bike"
-        android:layout_toEndOf="@+id/stair" />
+        android:layout_toEndOf="@+id/stair"
+        android:textColor="@color/textColor"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -63,7 +79,8 @@
         android:text="Stationary Bike: "
         android:id="@+id/stat_bike"
         android:layout_below="@+id/stair"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textColor="@color/textColor"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -72,7 +89,8 @@
         android:text="0"
         android:id="@+id/stat_bike_num"
         android:layout_alignTop="@+id/stat_bike"
-        android:layout_toEndOf="@+id/stat_bike" />
+        android:layout_toEndOf="@+id/stat_bike"
+        android:textColor="@color/textColor"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -81,7 +99,8 @@
         android:text="Treadmill: "
         android:id="@+id/treadmill"
         android:layout_below="@+id/stat_bike"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textColor="@color/textColor"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -90,7 +109,8 @@
         android:text="0"
         android:id="@+id/treadmill_num"
         android:layout_alignTop="@+id/treadmill"
-        android:layout_toEndOf="@+id/treadmill" />
+        android:layout_toEndOf="@+id/treadmill"
+        android:textColor="@color/textColor"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -99,7 +119,8 @@
         android:text="Deadlift: "
         android:id="@+id/deadlift"
         android:layout_below="@+id/treadmill"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textColor="@color/textColor"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -108,7 +129,8 @@
         android:text="0"
         android:id="@+id/deadlift_num"
         android:layout_below="@+id/treadmill"
-        android:layout_toEndOf="@+id/deadlift" />
+        android:layout_toEndOf="@+id/deadlift"
+        android:textColor="@color/textColor"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -117,7 +139,8 @@
         android:text="Lat Pulldown: "
         android:id="@+id/lat_pull"
         android:layout_below="@+id/deadlift"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textColor="@color/textColor"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -126,7 +149,8 @@
         android:text="0"
         android:id="@+id/lat_pull_num"
         android:layout_alignTop="@+id/lat_pull"
-        android:layout_toEndOf="@+id/lat_pull" />
+        android:layout_toEndOf="@+id/lat_pull"
+        android:textColor="@color/textColor"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -135,7 +159,8 @@
         android:text="Row Machine: "
         android:id="@+id/row_mach"
         android:layout_below="@+id/lat_pull"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textColor="@color/textColor"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -144,7 +169,8 @@
         android:text="0"
         android:id="@+id/row_mach_num"
         android:layout_below="@+id/lat_pull_num"
-        android:layout_toEndOf="@+id/row_mach" />
+        android:layout_toEndOf="@+id/row_mach"
+        android:textColor="@color/textColor"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -153,7 +179,8 @@
         android:text="Bench Press: "
         android:id="@+id/bench_press_norm"
         android:layout_below="@+id/row_mach"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textColor="@color/textColor"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -162,7 +189,8 @@
         android:text="0"
         android:id="@+id/bench_press_norm_num"
         android:layout_below="@+id/row_mach"
-        android:layout_toEndOf="@+id/bench_press_norm" />
+        android:layout_toEndOf="@+id/bench_press_norm"
+        android:textColor="@color/textColor"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -171,7 +199,8 @@
         android:text="Chest Flys: "
         android:id="@+id/chest_fly"
         android:layout_below="@+id/bench_press_norm"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textColor="@color/textColor"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -180,7 +209,8 @@
         android:text="0"
         android:id="@+id/chest_fly_num"
         android:layout_below="@+id/bench_press_norm"
-        android:layout_toEndOf="@+id/chest_fly" />
+        android:layout_toEndOf="@+id/chest_fly"
+        android:textColor="@color/textColor"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -189,7 +219,8 @@
         android:text="Incline Bench Press: "
         android:id="@+id/bench_press_incl"
         android:layout_below="@+id/chest_fly"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textColor="@color/textColor"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -198,7 +229,8 @@
         android:text="0"
         android:id="@+id/bench_press_incl_num"
         android:layout_below="@+id/chest_fly_num"
-        android:layout_toEndOf="@+id/bench_press_incl" />
+        android:layout_toEndOf="@+id/bench_press_incl"
+        android:textColor="@color/textColor"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -207,7 +239,8 @@
         android:text="Decline Bench Press: "
         android:id="@+id/bench_press_decl"
         android:layout_below="@+id/bench_press_incl"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textColor="@color/textColor"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -216,7 +249,8 @@
         android:text="0"
         android:id="@+id/bench_press_decl_num"
         android:layout_below="@+id/bench_press_incl_num"
-        android:layout_toEndOf="@+id/bench_press_decl" />
+        android:layout_toEndOf="@+id/bench_press_decl"
+        android:textColor="@color/textColor"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -225,7 +259,8 @@
         android:text="Calf Raises: "
         android:id="@+id/calf_raise"
         android:layout_below="@+id/bench_press_decl"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textColor="@color/textColor"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -234,7 +269,8 @@
         android:text="0"
         android:id="@+id/calf_raise_num"
         android:layout_alignTop="@+id/calf_raise"
-        android:layout_toEndOf="@+id/calf_raise" />
+        android:layout_toEndOf="@+id/calf_raise"
+        android:textColor="@color/textColor"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -243,7 +279,8 @@
         android:text="Leg Extension: "
         android:id="@+id/leg_ext"
         android:layout_below="@+id/calf_raise"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textColor="@color/textColor"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -252,7 +289,8 @@
         android:text="0"
         android:id="@+id/leg_ext_num"
         android:layout_below="@+id/calf_raise_num"
-        android:layout_toEndOf="@+id/bench_press_norm_num" />
+        android:layout_toEndOf="@+id/bench_press_norm_num"
+        android:textColor="@color/textColor"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -261,7 +299,8 @@
         android:text="Leg Press: "
         android:id="@+id/leg_press"
         android:layout_below="@+id/leg_ext"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textColor="@color/textColor"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -270,7 +309,8 @@
         android:text="0"
         android:id="@+id/leg_press_num"
         android:layout_alignBottom="@+id/leg_press"
-        android:layout_toEndOf="@+id/leg_press" />
+        android:layout_toEndOf="@+id/leg_press"
+        android:textColor="@color/textColor"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -279,7 +319,8 @@
         android:text="Squat:"
         android:id="@+id/squat"
         android:layout_below="@+id/leg_press"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textColor="@color/textColor"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -288,7 +329,8 @@
         android:text="0"
         android:id="@+id/squat_num"
         android:layout_alignBottom="@+id/squat"
-        android:layout_toEndOf="@+id/squat" />
+        android:layout_toEndOf="@+id/squat"
+        android:textColor="@color/textColor"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -297,7 +339,8 @@
         android:text="Shoulder Press:"
         android:id="@+id/should_press"
         android:layout_below="@+id/squat"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textColor="@color/textColor"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -306,6 +349,18 @@
         android:text="0"
         android:id="@+id/should_press_num"
         android:layout_alignBottom="@+id/should_press"
-        android:layout_toEndOf="@+id/stat_bike" />
+        android:layout_toEndOf="@+id/stat_bike"
+        android:textColor="@color/textColor"/>
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="20dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/gym_128"
+        android:layout_weight="0.91"
+        android:scaleType="fitCenter"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

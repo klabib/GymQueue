@@ -1,6 +1,7 @@
 package edu.umd.mguenzel.gymqueue;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -9,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.firebase.client.Firebase;
 
@@ -33,22 +35,30 @@ public class CategorySelect extends AppCompatActivity {
 
         uid = getIntent().getStringExtra("UID");
 
+        TextView tv=(TextView)findViewById(R.id.page_title);
+        Typeface face=Typeface.createFromAsset(getAssets(),"fonts/quicksand_regular.ttf");
+        tv.setTypeface(face);
+
         Log.i("CATSELECT", "arrived to cat select page UID: " + uid);
         final Button back = (Button) findViewById(R.id.back_button);
         registerForContextMenu(back);
+        back.setTypeface(face);
 
         final Button cardio = (Button) findViewById(R.id.cardio_button);
         registerForContextMenu(cardio);
+        cardio.setTypeface(face);
 
         final Button chest = (Button) findViewById(R.id.chest_button);
         registerForContextMenu(chest);
+        chest.setTypeface(face);
 
         final Button legs = (Button) findViewById(R.id.legs_button);
         registerForContextMenu(legs);
+        legs.setTypeface(face);
 
         final Button shoulders = (Button) findViewById(R.id.shoulders_button);
         registerForContextMenu(shoulders);
-
+        shoulders.setTypeface(face);
 
     }
 

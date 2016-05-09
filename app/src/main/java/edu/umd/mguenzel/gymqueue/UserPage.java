@@ -1,6 +1,7 @@
 package edu.umd.mguenzel.gymqueue;
 
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
@@ -34,23 +35,95 @@ public class UserPage extends Activity{
         Firebase.setAndroidContext(this);
         mFirebase = new Firebase("https://gymqueue.firebaseio.com");
 
+        TextView tv=(TextView)findViewById(R.id.title);
+        Typeface face=Typeface.createFromAsset(getAssets(),"fonts/quicksand_regular.ttf");
+        tv.setTypeface(face);
+
+
+        TextView elliptical =(TextView)findViewById(R.id.elliptical);
+        elliptical.setTypeface(face);
         elliptical_num = (TextView)findViewById(R.id.elliptical_num);
+        elliptical_num.setTypeface(face);
+
+        TextView rec_bike =(TextView)findViewById(R.id.rec_bike);
+        rec_bike.setTypeface(face);
         rec_bike_num = (TextView)findViewById(R.id.rec_bike_num);
+        rec_bike_num.setTypeface(face);
+
+        TextView stair =(TextView)findViewById(R.id.stair);
+        stair.setTypeface(face);
         stair_num = (TextView)findViewById(R.id.stair_num);
+        stair_num.setTypeface(face);
+
+        TextView stat_bike =(TextView)findViewById(R.id.stat_bike);
+        stat_bike.setTypeface(face);
         stat_bike_num = (TextView)findViewById(R.id.stat_bike_num);
+        stat_bike_num.setTypeface(face);
+
+        TextView treadmill =(TextView)findViewById(R.id.treadmill);
+        treadmill.setTypeface(face);
         treadmill_num = (TextView)findViewById(R.id.treadmill_num);
+        treadmill_num.setTypeface(face);
+
+        TextView deadlift =(TextView)findViewById(R.id.deadlift);
+        deadlift.setTypeface(face);
         deadlift_num = (TextView)findViewById(R.id.deadlift_num);
+        deadlift_num.setTypeface(face);
+
+        TextView lat_pull =(TextView)findViewById(R.id.lat_pull);
+        lat_pull.setTypeface(face);
         lat_pull_num = (TextView)findViewById(R.id.lat_pull_num);
+        lat_pull_num.setTypeface(face);
+
+        TextView row_mach =(TextView)findViewById(R.id.row_mach);
+        row_mach.setTypeface(face);
         row_mach_num = (TextView)findViewById(R.id.row_mach_num);
+        row_mach_num.setTypeface(face);
+
+        TextView bench_press_norm =(TextView)findViewById(R.id.bench_press_norm);
+        bench_press_norm.setTypeface(face);
         bench_press_norm_num = (TextView)findViewById(R.id.bench_press_norm_num);
+        bench_press_norm_num.setTypeface(face);
+
+        TextView chest_fly =(TextView)findViewById(R.id.chest_fly);
+        chest_fly.setTypeface(face);
         chest_fly_num = (TextView)findViewById(R.id.chest_fly_num);
+        chest_fly_num.setTypeface(face);
+
+        TextView bench_press_incl =(TextView)findViewById(R.id.bench_press_incl);
+        bench_press_incl.setTypeface(face);
         bench_press_incl_num = (TextView)findViewById(R.id.bench_press_incl_num);
+        bench_press_incl_num.setTypeface(face);
+
+        TextView bench_press_decl =(TextView)findViewById(R.id.bench_press_decl);
+        bench_press_decl.setTypeface(face);
         bench_press_decl_num = (TextView)findViewById(R.id.bench_press_decl_num);
+        bench_press_decl_num.setTypeface(face);
+
+        TextView calf_raise =(TextView)findViewById(R.id.calf_raise);
+        calf_raise.setTypeface(face);
         calf_raise_num = (TextView)findViewById(R.id.calf_raise_num);
+        calf_raise_num.setTypeface(face);
+
+        TextView leg_ext =(TextView)findViewById(R.id.leg_ext);
+        leg_ext.setTypeface(face);
         leg_ext_num = (TextView)findViewById(R.id.leg_ext_num);
+        leg_ext_num.setTypeface(face);
+
+        TextView leg_press =(TextView)findViewById(R.id.leg_press);
+        leg_press.setTypeface(face);
         leg_press_num = (TextView)findViewById(R.id.leg_press_num);
+        leg_press_num.setTypeface(face);
+
+        TextView squat =(TextView)findViewById(R.id.squat);
+        squat.setTypeface(face);
         squat_num = (TextView)findViewById(R.id.squat_num);
+        squat_num.setTypeface(face);
+
+        TextView should_press =(TextView)findViewById(R.id.should_press);
+        should_press.setTypeface(face);
         should_press_num = (TextView)findViewById(R.id.should_press_num);
+        should_press_num.setTypeface(face);
 
         numbers = new long[16];
 

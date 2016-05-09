@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.Loader;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -77,6 +78,23 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        TextView tv=(TextView)findViewById(R.id.app_title);
+        Typeface face=Typeface.createFromAsset(getAssets(),"fonts/quicksand_regular.ttf");
+        tv.setTypeface(face);
+
+        AutoCompleteTextView tv1=(AutoCompleteTextView)findViewById(R.id.email);
+        tv1.setTypeface(face);
+
+        EditText tv2=(EditText)findViewById(R.id.password);
+        tv2.setTypeface(face);
+
+
+        Button sign_in = (Button) findViewById(R.id.email_sign_in_button);
+        sign_in.setTypeface(face);
+
+        Button sign_up = (Button) findViewById(R.id.email_sign_up_button);
+        sign_up.setTypeface(face);
 
         //firebase setup
         Firebase.setAndroidContext(this);

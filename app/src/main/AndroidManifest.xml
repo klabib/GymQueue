@@ -35,7 +35,9 @@
         <activity android:name=".ReserveMachine"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name="UserPage"></activity>
+        <activity android:name="UserPage"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>

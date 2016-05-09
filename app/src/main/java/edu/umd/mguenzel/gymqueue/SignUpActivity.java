@@ -1,11 +1,13 @@
 package edu.umd.mguenzel.gymqueue;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.client.Firebase;
@@ -23,11 +25,27 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
+        TextView tv=(TextView)findViewById(R.id.textView);
+        Typeface face=Typeface.createFromAsset(getAssets(),"fonts/quicksand_regular.ttf");
+        tv.setTypeface(face);
+
+
+        TextView email_text =(TextView)findViewById(R.id.email_text);
+        email_text.setTypeface(face);
         email = (EditText) findViewById(R.id.email);
+
+        TextView password_text =(TextView)findViewById(R.id.password_text);
+        password_text.setTypeface(face);
         pass = (EditText) findViewById(R.id.password);
+
+        TextView con_pass_text =(TextView)findViewById(R.id.confirm_text);
+        con_pass_text.setTypeface(face);
         passConfirm = (EditText) findViewById(R.id.cpassword);
+
         submit = (Button) findViewById(R.id.submit);
+        submit.setTypeface(face);
         back = (Button) findViewById(R.id.back);
+        back.setTypeface(face);
         mFirebase = new Firebase("https://gymqueue.firebaseio.com");
 
 
