@@ -181,8 +181,9 @@ public class ReserveMachine extends Activity {
 
                         updateUserStats(snapshot, uid, machine);
 
-                        /*
 
+
+                        /*
                         Intent intent_alarm = new Intent(getApplicationContext(), NotificationCreator.class);
                         PendingIntent pi = PendingIntent.getService(getApplicationContext(), 0, intent_alarm, 0);
 
@@ -196,12 +197,13 @@ public class ReserveMachine extends Activity {
 
                         Log.i("test", "" + date.toString());
 
+
                         Calendar calendar = Calendar.getInstance();
                         calendar.setTimeInMillis((date.getTime()));
                         int mYear = calendar.get(Calendar.YEAR);
                         int mMonth = calendar.get(Calendar.MONTH) + 1;
                         int mDay = calendar.get(Calendar.DAY_OF_MONTH);
-                        */
+*/
 
                         setResult(RESULT_OK);
                         finish();
