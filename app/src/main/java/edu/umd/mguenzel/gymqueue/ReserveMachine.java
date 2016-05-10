@@ -183,12 +183,16 @@ public class ReserveMachine extends Activity {
                         updateUserStats(snapshot, uid, machine);
 
 
-                        Intent intent_alarm = new Intent(getApplicationContext(), Notification.class);
+                        Intent intent_alarm = new Intent(getApplicationContext(), NotificationCreator.class);
                         PendingIntent pi = PendingIntent.getService(getApplicationContext(), 0, intent_alarm, 0);
 
-                        long alarm_time = System.currentTimeMillis();
+                        Calendar calendar =  Calendar.getInstance();
+                        calendar.set(year,month, day, Integer.parseInt(hour), Integer.parseInt(min));
 
-                        mAlarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, date.getTime() , pi);
+                        long when = calendar.getTimeInMillis();
+                        long temp = 300000;
+
+                        mAlarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, when - temp, pi);
                         /*
                         Log.i("test", "" + date.toString());
 
