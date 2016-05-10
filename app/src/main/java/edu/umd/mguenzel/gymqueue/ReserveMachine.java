@@ -2,7 +2,6 @@ package edu.umd.mguenzel.gymqueue;
 
 import android.app.Activity;
 import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -182,6 +181,7 @@ public class ReserveMachine extends Activity {
 
                         updateUserStats(snapshot, uid, machine);
 
+                        /*
 
                         Intent intent_alarm = new Intent(getApplicationContext(), NotificationCreator.class);
                         PendingIntent pi = PendingIntent.getService(getApplicationContext(), 0, intent_alarm, 0);
@@ -193,7 +193,7 @@ public class ReserveMachine extends Activity {
                         long temp = 300000;
 
                         mAlarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, when - temp, pi);
-                        /*
+
                         Log.i("test", "" + date.toString());
 
                         Calendar calendar = Calendar.getInstance();
