@@ -31,6 +31,7 @@ public class NotificationCreator extends IntentService {
                 .setSmallIcon(icon)
                 .setAutoCancel(true)
                 .setDefaults(Notification.DEFAULT_SOUND)
+                .setWhen(time)
                 .build();
 
         nm.notify(NOTIF_ID, notification);
